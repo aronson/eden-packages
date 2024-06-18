@@ -6,16 +6,16 @@ pkgname=toolchain-gcc-$GCC_TARGET-binutils
 pkgver=2.44
 epoch=
 pkgdesc="GNU binary utilities"
-arch=("x86_64" "aarch64")
+arch=("x86_64" "aarch64" "arm64")
 url="http://www.gnu.org/software/binutils"
 license=("GPL-3.0-or-later")
 source=("http://ftp.gnu.org/gnu/binutils/binutils-$pkgver.tar.xz")
-depends=(runtime-gcc-libs runtime-musl)
-makedepends=(runtime-musl-dev)
+#depends=(runtime-gcc-libs runtime-musl)
+#makedepends=(runtime-musl-dev)
 groups=(toolchain-gcc-$GCC_TARGET)
 sha256sums=('ce2017e059d63e67ddb9240e9d4ec49c2893605035cd60e92ad53177f4377237')
 
-. "/wf/config/runtime-env-vars.sh"
+. "../../config/runtime-env-vars.sh"
 
 prepare() {
 	mkdir -p "binutils-$pkgver-build"
@@ -32,6 +32,7 @@ build() {
 		--enable-colored-disassembly \
 		--enable-gold=no \
 		--enable-ld=default \
+		--enable-threads \
 		--enable-lto \
 		--enable-plugins \
 		--enable-threads \

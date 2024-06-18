@@ -9,7 +9,7 @@ pkgver=1.0.r147.d895173
 pkgrel=1
 epoch=
 pkgdesc="minimal readline replacement"
-arch=("i686" "x86_64" "armv6h" "aarch64")
+arch=("i686" "x86_64" "armv6h" "aarch64" "arm64")
 url="https://github.com/antirez/linenoise"
 license=("BSD-2-Clause")
 source=("$pkgname::git+https://github.com/antirez/linenoise#branch=master")
@@ -17,7 +17,7 @@ depends=(runtime-musl)
 makedepends=(runtime-musl-dev)
 sha256sums=('SKIP')
 
-. "/wf/config/runtime-env-vars.sh"
+. "../../../config/runtime-env-vars.sh"
 
 . "../../templates/git-pkgver.PKGBUILD"
 
