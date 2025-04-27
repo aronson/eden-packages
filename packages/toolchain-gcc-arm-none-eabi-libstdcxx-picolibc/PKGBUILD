@@ -16,7 +16,7 @@ GCC_IS_LIBSTDCXX=yes
 TARGET_CFLAGS="-g -gz -O2 -ffunction-sections"
 export CFLAGS="$TARGET_CFLAGS"
 export CFLAGS_FOR_TARGET="$TARGET_CFLAGS"
-export CXXFLAGS="$TARGET_CFLAGS"
+export CXXFLAGS="$CPPFLAGS $TARGET_CFLAGS"
 export CXXFLAGS_FOR_TARGET="$TARGET_CFLAGS"
 
 . "../templates/toolchain-gcc-gcc15.PKGBUILD"

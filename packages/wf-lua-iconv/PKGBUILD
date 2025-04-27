@@ -4,7 +4,7 @@
 
 pkgname=(wf-lua-iconv)
 _pkgver=7.1
-pkgver=7.1.r101.5452834
+pkgver=7.1.r102.3c729ec
 pkgrel=1
 epoch=
 pkgdesc="Lua iconv wrapper"
@@ -61,7 +61,7 @@ check() {
 	if [ "$WF_HOST_OS" == "windows" ]; then
 		export LUA_CPATH="C:/msys64/wf/packages/wf-lua-iconv/src/wf-lua-iconv/?.dll"
 	elif [ "$WF_HOST_OS" == "macos" ]; then
-		export LUA_CPATH="/Users/slacker/sources/wonderful-packages/packages/wf-lua-iconv/src/wf-lua-iconv/?.dylib"
+		export LUA_CPATH="/wf/packages/wf-lua-iconv/src/wf-lua-iconv/?.dylib"
 	fi
 	$WF_PATH/bin/wf-lua test_iconv.lua
 }

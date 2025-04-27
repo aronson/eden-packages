@@ -36,7 +36,7 @@ prepare() {
 	# ._.
 	for i in libtonc-wf.patch; do
 		unix2dos ../"$i"
-		patch --binary -p1 <../"$i"
+		patch -l -p1 <../"$i"
 	done
 
 	# long-deprecated header with distinct licensing

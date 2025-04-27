@@ -1,4 +1,10 @@
 build
 **/pkg
+**/*.pkg.tar.gz
+**/*.pkg.tar.xz
+**/*.tar.gz
+**/*.tar.xz
+**/*.tar.gz.asc
+**/*.tar.xz.asc
 **/src
 **/__pycache__

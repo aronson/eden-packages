@@ -4,7 +4,7 @@
 
 pkgname=(wf-lua-filesystem)
 _pkgver=1.8.0
-pkgver=1.8.0.r355.ff2cbc2
+pkgver=1.8.0.r359.0951178
 pkgrock=luafilesystem-scm-1
 pkgrel=1
 epoch=

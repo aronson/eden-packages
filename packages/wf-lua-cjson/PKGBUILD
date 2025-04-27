@@ -4,7 +4,7 @@
 
 pkgname=(wf-lua-cjson)
 _pkgver=2.10.12
-pkgver=2.10.12.r305.c92ecda
+pkgver=2.10.12.r308.91ca29d
 pkgrock=lua-cjson-2.1.0.14-1
 pkgrel=1
 epoch=

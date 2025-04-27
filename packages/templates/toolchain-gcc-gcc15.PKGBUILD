@@ -9,7 +9,7 @@ if [ "x$GCC_IS_LIBSTDCXX" = "xyes" ]; then
 else
 	pkgname=(toolchain-gcc-$GCC_TARGET-gcc toolchain-gcc-$GCC_TARGET-gcc-libs)
 	depends=(runtime-gcc-libs runtime-musl toolchain-gcc-$GCC_TARGET-binutils)
-	arch=("x86_64" "aarch64")
+	arch=("x86_64" "aarch64" "arm64")
 fi
 pkgver=15.1.0
 _gccver=15.1.0
@@ -24,7 +24,7 @@ url="https://gcc.gnu.org"
 license=("GPL-3.0-or-later")
 source=("http://ftp.gnu.org/gnu/gcc/gcc-$pkgver/gcc-$pkgver.tar.xz"
         "http://gmplib.org/download/gmp/gmp-$_gmpver.tar.xz"
-        "http://www.mpfr.org/mpfr-$_mpfrver/mpfr-$_mpfrver.tar.xz"
+        "https://ftp.gnu.org/gnu/mpfr//mpfr-$_mpfrver.tar.xz"
         "http://ftp.gnu.org/gnu/mpc/mpc-$_mpcver.tar.gz"
 	"https://libisl.sourceforge.io/isl-$_islver.tar.xz"
 	"file:///wf/patches/gcc15-poison-system-directories.patch"
@@ -52,7 +52,7 @@ prepare() {
 
 	# These patches are used by the toolchain and most likely necessary.
 	# - HACK: hijack RTEMS's libstdc++ crossconfig for our own purposes (which has the dynamic feature checks we want)
-	sed -i "s/\*-rtems\*/*-unknown*/" libstdc++-v3/configure
+	gsed -i "s/\*-rtems\*/*-unknown*/" libstdc++-v3/configure
 	# - Add -MJ compile_commands.json fragment emitter, matching Clang.
 	patch -p1 <../gcc13-clang-MJ.patch
 

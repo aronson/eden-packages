@@ -6,7 +6,7 @@ from .cmd.build import cmd_build
 from .cmd.build_bootstrap import cmd_build_bootstrap
 from .cmd.copy_anyarchs import cmd_copy_anyarchs
 from .cmd.mirror import cmd_mirror
-from .environment import NativeLinuxEnvironment, NativeWindowsEnvironment, ContainerLinuxEnvironment
+from .environment import NativeLinuxEnvironment, NativeWindowsEnvironment, ContainerLinuxEnvironment, NativeMacEnvironment
 import addict
 import argparse
 import platform
@@ -17,7 +17,9 @@ ctx = addict.Dict({
         "linux/aarch64",
         "linux/armv6h",
         "linux/riscv64",
-        "windows/x86_64"
+        "windows/x86_64",
+        "mac/x86_64",
+        "mac/arm64"
     ],
     "environments": {},
     "preferred_environment": None,
@@ -39,6 +41,9 @@ elif platform.system() == "Linux":
     add_environment(ContainerLinuxEnvironment("aarch64", "aarch64"), not (platform.machine() == "AMD64" or platform.machine() == "x86_64"))
     add_environment(ContainerLinuxEnvironment("riscv64", "riscv64"), False)
     add_environment(ContainerLinuxEnvironment("armv6h", "arm32v6"), False)
+elif platform.system() == "Darwin":
+    if platform.machine() == "arm64":
+        add_environment(NativeMacEnvironment("arm64"), True)
 
 if ctx.preferred_environment is None:
     raise Exception("unsupported platform: " + platform.system() + "/" + platform.machine())

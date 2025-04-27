@@ -67,6 +67,11 @@ prepare() {
 }
 
 build() {
+    export PATH="/opt/homebrew/opt/llvm@16/bin:$PATH"
+    export CC="/opt/homebrew/opt/llvm@16/bin/clang"
+    export CXX="$CC++"
+    export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/llvm@16/lib"
+    export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/llvm@16/include"
     export CFLAGS="$CFLAGS -Wno-int-conversion"
     export PKG_CONFIG_PATH="${srcdir}"/temp/usr/lib/pkgconfig
     export PATH="${srcdir}/temp/usr/bin:${PATH}"
@@ -173,7 +178,10 @@ package() {
     mv ."$WF_PATH"/bin/* bin/
     install -dm755 share
     install -dm755 etc
-    install -m644 "/wf/packages/wf-pacman/pacman.conf" etc
+    install -dm755 etc/pacman.d
+    install -m644 "/wf/packages/wf-pacman/config/pacman.conf" etc
+    install -m644 "/wf/packages/wf-pacman/config/makepkg.conf" etc
+    install -m644 "/wf/packages/wf-pacman/config/pacman.d/99-final.conf" etc
     gsed -i -e "s/%ARCH%/"$CARCH"/g" -e "s/%OS%/"$WF_HOST_OS"/g" etc/pacman.conf
     rm -r opt
 

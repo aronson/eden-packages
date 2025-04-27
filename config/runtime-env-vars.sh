@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env /bash
 shopt -s extglob
 
 WF_PACMAN_CONFIG_PATH=$(dirname "$(realpath "${BASH_SOURCE[0]}" )")
 WF_PATH="/opt/wonderful"
-WF_DESTDIR="/opt/wonderful"
+WF_DESTDIR="/"
 WF_USE_MUSL=true
 WF_LIBRARY_SUFFIX=.so
 WF_EXECUTABLE_SUFFIX=
@@ -25,7 +25,7 @@ esac
 
 case `uname` in DARWIN*|Darwin*)
 	WF_USE_MUSL=false
-	WF_LUA_LDFLAGS="-I/opt/homebrew/Cellar/lua/5.4.6/include/lua -L/opt/homebrew/Cellar/lua/5.4.6/lib -llua"
+	WF_LUA_LDFLAGS="-I/opt/homebrew/Cellar/lua/5.4.7/include/lua -L/opt/homebrew/Cellar/lua/5.4.7/lib -llua"
 	WF_LIBRARY_SUFFIX=.dylib
 	WF_HOST_OS=macos
 esac
@@ -105,6 +105,8 @@ wf_disable_host_build() {
 	# disable MinGW environment patches
 	if [ "$WF_HOST_OS" == "windows" ]; then
 		export CONFIG_SITE="$WF_PACMAN_CONFIG_PATH"/empty-config.site
+		unset CC CXX CPPFLAGS CFLAGS CXXFLAGS LDFLAGS
+	elif [ "$WF_HOST_OS" == "macos" ]; then
 		unset CC CXX CPPFLAGS CFLAGS CXXFLAGS LDFLAGS
 	fi
 }

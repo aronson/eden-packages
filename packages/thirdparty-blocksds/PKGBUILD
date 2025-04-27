@@ -68,7 +68,7 @@ build() {
 	wf_use_toolchain gcc-arm-none-eabi arm-none-eabi
 
 	cd "$_pkgname"
-	BLOCKSDS=`pwd` make
+	RANLIB=arm-none-eabi-gcc-ranlib AR=arm-none-eabi-gcc-ar BLOCKSDS=`pwd` make
 }
 
 package_thirdparty-blocksds-toolchain() {

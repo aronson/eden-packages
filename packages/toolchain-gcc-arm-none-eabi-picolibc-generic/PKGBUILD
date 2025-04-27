@@ -4,7 +4,7 @@
 
 pkgname=toolchain-gcc-arm-none-eabi-picolibc-generic
 _pkgver=1.8.10
-pkgver=1.8.10.r25500.02962a5fb
+pkgver=1.8.10.r25501.89eee9cf2
 pkgrel=1
 epoch=
 pkgdesc="picolibc-based C library for Wonderful toolchain"
@@ -25,14 +25,14 @@ sha256sums=(
 )
 options=(!strip)
 
-. "../../config/runtime-env-vars.sh"
+. "/wf/config/runtime-env-vars.sh"
 
 prepare() {
 	mkdir -p picolibc-build
 }
 
 GIT_REPO_DIR=wf-picolibc
-. "../templates/git-pkgver.PKGBUILD"
+. "/wf/packages/templates/git-pkgver.PKGBUILD"
 
 build() {
 	cd picolibc-build
@@ -78,5 +78,5 @@ package() {
 	wf_relocate_path_to_destdir
 
 	rm toolchain/gcc-arm-none-eabi/arm-none-eabi/lib/picolibc*.ld
-	cp /Users/slacker/sources/wonderful-packages/patches/picolibc.specs toolchain/gcc-arm-none-eabi/arm-none-eabi/lib/
+	cp /wf/patches/picolibc.specs toolchain/gcc-arm-none-eabi/arm-none-eabi/lib/
 }

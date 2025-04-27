@@ -4,7 +4,7 @@
 
 pkgname=(toolchain-llvm-mos-llvm toolchain-llvm-mos-llvm-dev)
 _pkgver=17.0.0
-pkgver=17.0.0.r461091.2bf839b2113e
+pkgver=17.0.0.r461093.33f23daa9f7c
 pkgrel=1
 epoch=
 pkgdesc="LLVM fork modified to target MOS CPUs"

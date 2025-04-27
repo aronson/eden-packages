@@ -4,7 +4,7 @@
 
 pkgname=wf-tools
 _pkgver=0.1.0
-pkgver=0.1.0.r107.49e5d99
+pkgver=0.1.0.r108.f5a3fda
 pkgrock=wf-tools-dev-1
 pkgrel=1
 epoch=
@@ -17,7 +17,6 @@ groups=(wf-environment)
 depends=(wf-lua wf-lua-filesystem wf-lua-iconv wf-lua-penlight wf-lua-posix wf-lua-toml)
 makedepends=(runtime-musl-dev wf-lua-dev)
 sha256sums=('SKIP')
-install=wf-tools.install
 
 . "../../config/runtime-env-vars.sh"
 
