@@ -63,15 +63,10 @@ prepare() {
     cd "${srcdir}"/pacman
 
     # [Wonderful]
-    sed -i -e "s/Pacman v\%s - libalpm v\%s/Pacman v%s - libalpm v%s (wf-pacman)/" src/pacman/pacman.c
+    sed -i -e "s/Pacman v\%s - libalpm v\%s/Pacman v%s - libalpm v%s (eden-pacman)/" src/pacman/pacman.c
 }
 
 build() {
-    export PATH="/opt/homebrew/opt/llvm@16/bin:$PATH"
-    export CC="/opt/homebrew/opt/llvm@16/bin/clang"
-    export CXX="$CC++"
-    export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/llvm@16/lib"
-    export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/llvm@16/include"
     export CFLAGS="$CFLAGS -Wno-int-conversion"
     export PKG_CONFIG_PATH="${srcdir}"/temp/usr/lib/pkgconfig
     export PATH="${srcdir}/temp/usr/bin:${PATH}"
@@ -171,8 +166,8 @@ package() {
     # [Wonderful] custom packaging process
     cd "$pkgdir"
     install -dm755 bin
-    mv ."$WF_PATH"/bin/pacman bin/wf-pacman
-    mv ."$WF_PATH"/bin/vercmp bin/wf-pacman-vercmp
+    mv ."$WF_PATH"/bin/pacman bin/eden-pacman
+    mv ."$WF_PATH"/bin/vercmp bin/eden-pacman-vercmp
     mv ."$WF_PATH"/etc etc/
     rm etc/pacman.conf
     mv ."$WF_PATH"/bin/* bin/

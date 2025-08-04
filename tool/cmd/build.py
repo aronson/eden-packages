@@ -55,7 +55,7 @@ def cmd_build(ctx, args):
     for package, target in tqdm(package_pairs):
         tqdm.write(colored(f"[*] Building {package} for {target}...", attrs=["bold"]))
         env = ctx.preferred_environment if target == "any" else ctx.environments[target]
-        result = env.run(["cd", str(env.root / str(resolve_package_path(package, env.path))), "&&", "makepkg", "-C", "--clean", "--syncdeps", "--force", "--noconfirm", "--skippgpcheck", package], check=True)
+        result = env.run(["cd", str(env.root / str(resolve_package_path(package, env.path))), "&&", "makepkg", "-A", "-C", "--clean", "--syncdeps", "--force", "--noconfirm", "--skippgpcheck", package], check=True)
         package_names = source_cache.get_package_by_name(package, target)["names"]
 
         for package_name in package_names:

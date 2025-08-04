@@ -2,7 +2,7 @@
 shopt -s extglob
 
 WF_PACMAN_CONFIG_PATH=$(dirname "$(realpath "${BASH_SOURCE[0]}" )")
-WF_PATH="/opt/wonderful"
+WF_PATH="/opt/eden"
 WF_DESTDIR="/"
 WF_USE_MUSL=true
 WF_LIBRARY_SUFFIX=.so
@@ -70,25 +70,29 @@ WF_RUNTIME_INCLUDES="-isystem $WF_PATH/include"
 WF_RUNTIME_LDFLAGS="$WF_RUNTIME_LDFLAGS -L$WF_PATH/lib"
 WF_RUNTIME_PKG_CONFIG_PATH="$WF_PATH/lib/pkgconfig"
 
+if [ "$WF_HOST_OS" == "macos" ]; then
+    WF_RUNTIME_LDFLAGS="$WF_RUNTIME_LDFLAGS -L$WF_PATH/lib -mmacosx-version-min=10.15"
+fi
+
 # This function does the following things:
-# 1. If WF_DESTDIR == /, relocate files from ./opt/wonderful to ./.
-# 2. If WF_DESTDIR != /, move existing files to opt/wonderful and cd to
-#    opt/wonderful.
+# 1. If WF_DESTDIR == /, relocate files from ./opt/eden to ./.
+# 2. If WF_DESTDIR != /, move existing files to opt/eden and cd to
+#    opt/eden.
 # In either case, the caller should start in PKGDIR and ends up in the
 # toolchain root directory.
 wf_relocate_path_to_destdir() {
 	if [ "$WF_DESTDIR" == "/" ]; then
-		if [ -d opt/wonderful ]; then
+		if [ -d opt/eden ]; then
 			mv opt _opt
-			mv _opt/wonderful/* .
+			mv _opt/eden/* .
 			rm -rf _opt
 		fi
 	else
-		if [ ! -d opt/wonderful ]; then
-			mkdir -p opt/wonderful
+		if [ ! -d opt/eden ]; then
+			mkdir -p opt/eden
 		fi
-		mv !(opt) opt/wonderful || true
-		cd opt/wonderful
+		mv !(opt) opt/eden || true
+		cd opt/eden
 	fi
 }
 
