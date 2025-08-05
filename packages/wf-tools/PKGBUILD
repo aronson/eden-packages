@@ -4,7 +4,7 @@
 
 pkgname=wf-tools
 _pkgver=0.1.0
-pkgver=0.1.0.r108.f5a3fda
+pkgver=0.1.0.r109.3fada8e
 pkgrock=wf-tools-dev-1
 pkgrel=1
 epoch=
@@ -22,6 +22,11 @@ sha256sums=('SKIP')
 
 . "../templates/git-pkgver.PKGBUILD"
 . "../templates/luarocks-package.PKGBUILD"
+
+prepare() {
+	cd "$pkgname"
+	sed -i -e 's@/opt/wonderful@'$WF_PATH'@g' lua/*.lua lua/wf/internal/path.lua
+}
 
 build() {
 	cd "$pkgname"

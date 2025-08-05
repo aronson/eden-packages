@@ -43,14 +43,18 @@ def cmd_build(ctx, args):
 
     for name, targets in tqdm([parse_package_reference(package, all_targets) for package in args.packages]):
         if name not in source_cache.get_package_names():
-            tqdm.write(colored(f"[*] {package} not found for {target}, skipping...", attrs=["bold"]))
+            tqdm.write(colored(f"[*] {name} not found for {target}, skipping...", attrs=["bold"]))
             continue
         srcinfo = source_cache.get_package_by_name(name, targets[0])
         if "any" in srcinfo["arch"]:
             package_pairs.append((name, "any"))
         else:
             for target in targets:
-                package_pairs.append((name, target))
+                if target.split("/")[1] in srcinfo["arch"]:
+                    package_pairs.append((name, target))
+                else:
+                    tqdm.write(colored(f"[*] {name} not supported on {target}, skipping...", attrs=["bold"]))
+                    continue
 
     for package, target in tqdm(package_pairs):
         tqdm.write(colored(f"[*] Building {package} for {target}...", attrs=["bold"]))

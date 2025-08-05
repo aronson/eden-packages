@@ -3,7 +3,7 @@
 # SPDX-FileContributor: Adrian "asie" Siekierka, 2023, 2024
 
 pkgname=(wf-lua wf-lua-dev)
-pkgver=5.4.7
+pkgver=5.4.8
 pkgrel=2
 epoch=
 pkgdesc="Lua scripting language"
@@ -11,7 +11,7 @@ arch=("i686" "x86_64" "armv6h" "aarch64" "arm64")
 url="https://www.lua.org"
 license=("MIT")
 source=(
-	"https://www.lua.org/ftp/lua-5.4.7.tar.gz"
+	"https://www.lua.org/ftp/lua-5.4.8.tar.gz"
 	"0011-linenoise.patch"
 	"lua-5.4.6-wonderful.patch"
 	"msys2-0001-When-running-lua-on-mintty-or-other.patch"
@@ -22,9 +22,9 @@ source=(
 depends=()
 makedepends=(runtime-linenoise-dev)
 sha256sums=(
-	"9fbf5e28ef86c69858f6d3d34eccc32e911c1a28b4120ff3e84aaa70cfbf1e30"
+	"4f18ddae154e793e46eeab727c59ef1c0c0c2b744e7b94219710d76f530629ae"
 	"8a7584ca1d91e4cd4ab93db73fb72c7a03f71851d372a55ae412a59edbe5eb04"
-	"05a5f908515967f7e5ca3b89222209d73f73fd0f925ce7e586c41bab91f0650a"
+	"SKIP"
 	"37246417ce7b1d062cb52012c087793c961527e5b6da5318cf573244a477f528"
 	"5f0c29865f9645a61ca62b1860f26ffac8b3458bd5e7b7a9c92daae0927a1914"
 	"9a7cb30b9d6f2a0e4479c4235415670686752553647ff63155ab0c61f9db2310"
@@ -50,11 +50,11 @@ build() {
 	cd "lua-$pkgver"
 
 	if [ "$WF_HOST_OS" == "windows" ]; then
-		make mingw MYCFLAGS="$WF_RUNTIME_INCLUDES" MYLDFLAGS="$WF_RUNTIME_LDFLAGS"
+		make mingw MYCFLAGS="$WF_RUNTIME_INCLUDES -DLUA_ROOT=\\\""$WF_PATH"/\\\"" MYLDFLAGS="$WF_RUNTIME_LDFLAGS"
 	elif [ "$WF_HOST_OS" == "macos" ]; then
-		make macosx MYCFLAGS="$WF_RUNTIME_INCLUDES" MYLDFLAGS="$WF_RUNTIME_LDFLAGS"
+		make macosx MYCFLAGS="$WF_RUNTIME_INCLUDES" -DLUA_ROOT=\\\""$WF_PATH"/\\\"" MYLDFLAGS="$WF_RUNTIME_LDFLAGS"
 	else
-		make linux MYCFLAGS="$WF_RUNTIME_INCLUDES -DLUA_USE_LINENOISE" MYLDFLAGS="$WF_RUNTIME_LDFLAGS" MYLIBS="-llinenoise"
+		make linux MYCFLAGS="$WF_RUNTIME_INCLUDES -DLUA_USE_LINENOISE -DLUA_ROOT=\\\""$WF_PATH"/\\\"" MYLDFLAGS="$WF_RUNTIME_LDFLAGS" MYLIBS="-llinenoise"
 	fi
 }
 

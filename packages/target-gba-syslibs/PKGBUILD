@@ -4,7 +4,7 @@
 
 pkgname=target-gba-syslibs
 _pkgver=0.1.0
-pkgver=0.1.0.r26.ec821d7
+pkgver=0.1.0.r29.40b46f2
 pkgrel=1
 epoch=
 pkgdesc="GBA target system libraries"
@@ -24,6 +24,11 @@ options=(!strip)
 . "../../config/runtime-env-vars.sh"
 
 . "../templates/git-pkgver.PKGBUILD"
+
+prepare() {
+	cd "$pkgname"
+	git submodule update --init --recursive
+}
 
 build() {
 	CFLAGS=""
