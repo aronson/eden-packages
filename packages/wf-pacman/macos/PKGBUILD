@@ -178,6 +178,7 @@ package() {
     install -m644 "/wf/packages/wf-pacman/config/makepkg.conf" etc
     install -m644 "/wf/packages/wf-pacman/config/pacman.d/99-final.conf" etc
     gsed -i -e "s/%ARCH%/"$CARCH"/g" -e "s/%OS%/"$WF_HOST_OS"/g" -e "s#%WF_PATH%#"$WF_PATH"#g" etc/pacman.conf
+    gsed -i -e "s/%ARCH%/"$CARCH"/g" -e "s/%OS%/"$WF_HOST_OS"/g" -e "s#%WF_PATH%#"$WF_PATH"#g" etc/makepkg.conf
     rm -r opt
 
     wf_relocate_path_to_destdir
