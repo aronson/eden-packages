@@ -166,8 +166,8 @@ package() {
     # [Wonderful] custom packaging process
     cd "$pkgdir"
     install -dm755 bin
-    mv ."$WF_PATH"/bin/pacman bin/eden-pacman
-    mv ."$WF_PATH"/bin/vercmp bin/eden-pacman-vercmp
+    mv ."$WF_PATH"/bin/pacman bin/wf-pacman
+    mv ."$WF_PATH"/bin/vercmp bin/wf-pacman-vercmp
     mv ."$WF_PATH"/etc etc/
     rm etc/pacman.conf
     mv ."$WF_PATH"/bin/* bin/
@@ -177,7 +177,7 @@ package() {
     install -m644 "/wf/packages/wf-pacman/config/pacman.conf" etc
     install -m644 "/wf/packages/wf-pacman/config/makepkg.conf" etc
     install -m644 "/wf/packages/wf-pacman/config/pacman.d/99-final.conf" etc
-    gsed -i -e "s/%ARCH%/"$CARCH"/g" -e "s/%OS%/"$WF_HOST_OS"/g" etc/pacman.conf
+    gsed -i -e "s/%ARCH%/"$CARCH"/g" -e "s/%OS%/"$WF_HOST_OS"/g" -e "s#%WF_PATH%#"$WF_PATH"#g" etc/pacman.conf
     rm -r opt
 
     wf_relocate_path_to_destdir

@@ -48,11 +48,11 @@ class NativeLinuxEnvironment(Environment):
 
 class NativeMacEnvironment(Environment):
     def __init__(self, arch):
-        super().__init__("mac", arch, os.getcwd())
+        super().__init__("macos", arch, os.getcwd())
 
     def run(self, args, **kwargs):
         clean_custom_keys(kwargs)
-        return subprocess.run(args, **kwargs)
+        return subprocess.run(["sh", "-c", " ".join(args)], **kwargs)
 
 class ContainerLinuxEnvironment(Environment):
     def __init__(self, arch, container_name):

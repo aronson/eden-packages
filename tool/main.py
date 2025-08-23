@@ -18,8 +18,8 @@ ctx = addict.Dict({
         "linux/armv6h",
         "linux/riscv64",
         "windows/x86_64",
-        "mac/x86_64",
-        "mac/arm64"
+        "macos/x86_64",
+        "macos/arm64"
     ],
     "environments": {},
     "preferred_environment": None,
@@ -44,6 +44,8 @@ elif platform.system() == "Linux":
 elif platform.system() == "Darwin":
     if platform.machine() == "arm64":
         add_environment(NativeMacEnvironment("arm64"), True)
+    else:
+        add_environment(NativeMacEnvironment("x86_64"), True)
 
 if ctx.preferred_environment is None:
     raise Exception("unsupported platform: " + platform.system() + "/" + platform.machine())
