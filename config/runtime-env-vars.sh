@@ -30,7 +30,7 @@ esac
 
 case `uname` in DARWIN*|Darwin*)
 	WF_USE_MUSL=false
-	WF_LUA_LDFLAGS="-I/opt/homebrew/Cellar/lua/5.4.7/include/lua -L/opt/homebrew/Cellar/lua/5.4.7/lib -llua"
+	WF_LUA_LDFLAGS="-I/opt/homebrew/opt/lua/include/lua -L/opt/homebrew/opt/lua/lib -llua"
 	WF_LIBRARY_SUFFIX=.dylib
 	WF_HOST_OS=macos
 esac

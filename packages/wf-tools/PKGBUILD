@@ -4,7 +4,7 @@
 
 pkgname=wf-tools
 _pkgver=0.1.0
-pkgver=0.1.0.r109.3fada8e
+pkgver=0.1.0.r128.fe174a7
 pkgrock=wf-tools-dev-1
 pkgrel=1
 epoch=
@@ -46,6 +46,10 @@ package() {
 	for i in *.lua; do
 		chmod 755 "$i"
 		cp -a "$i" "$pkgdir$WF_DESTDIR"/bin/"${i%.*}"
+	done
+	for i in wf-env*; do
+		chmod 644 "$i"
+		cp -a "$i" "$pkgdir$WF_DESTDIR"/bin/"$i"
 	done
 	mkdir -p "$pkgdir$WF_DESTDIR"/lib/lua/5.4
 	cp -aR wf "$pkgdir$WF_DESTDIR"/lib/lua/5.4/wf

@@ -49,6 +49,14 @@ Example call:
 
     $ ./pkgtool build wf-tools@x86_64,aarch64 target-wswan-examples 
 
+The `@x86_64` suffix can be used to narrow down a build to specific architectures. This is useful for quicker building and testing of in-development packages.
+
+### Building Linux bootstraps
+
+The Linux bootstraps are effectively self-contained repackagings of a pre-installed `wf-pacman` package, allowing easy end user installation.
+
+    $ ./pkgtool build-bootstrap [targets...]
+
 ### Building macOS bootstraps
 
 The macOS bootstrap is effectively a self-contained repackagings of a pre-installed `wf-pacman` package, allowing easy end user installation.
